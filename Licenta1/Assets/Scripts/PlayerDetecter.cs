@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
+
 public class PlayerDetecter : MonoBehaviour
 {
     List<List<GameObject>> clusters;
@@ -15,10 +16,13 @@ public class PlayerDetecter : MonoBehaviour
     public int cl_number;
     public GameObject clusterCenter;
     public GameObject point_prefab;
+    public GameObject navGoal;
     List<Color> colors;
     int moved;
     int iterations = 0;
     bool clustering = true;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +77,47 @@ public class PlayerDetecter : MonoBehaviour
             CancelInvoke();
             string mesaj = "Done Clustering after " + (iterations - 1) + " iterations";
             Debug.Log(mesaj);
+            UpdateGoal(SetNavGoalCoords());
         }
+    }
+
+    Vector3 SetNavGoalCoords()
+	{
+        float new_x = 0f;
+        float new_y = 0f;
+        float sum_x = 0, sum_y = 0;
+        int point_count = 0;
+        for (int i = 0; i < cluster_centers.Count; i++)
+		{
+            sum_x += cluster_centers[i].transform.position.x * clusters[i].Count;
+            sum_y += cluster_centers[i].transform.position.y * clusters[i].Count;
+            point_count = point_count + clusters[i].Count;
+            //Debug.Log(String.Format("Cluster {0} has {1} points. point_count = {3} ({2})", i, clusters[i].Count, cluster_centers[i].GetComponent<SpriteRenderer>().color,point_count));
+        }
+        float new_x_t = sum_x / point_count;
+        float new_y_t = sum_y / point_count;
+		new_x = (float)Math.Round(new_x_t);
+		new_y = (float)Math.Round(new_y_t);
+
+		if (new_x < new_x_t)
+			new_x = new_x + 0.5f;
+		else
+			new_x = new_x - 0.5f;
+
+		if (new_y < new_y_t)
+			new_y = new_y + 0.5f;
+		else
+			new_y = new_y - 0.5f;
+
+
+		Debug.Log(String.Format("new_x = {0} new_x_t = {1}\nnew_y = {2} new_y_t = {3}", new_x, new_x_t, new_y, new_y_t));
+
+        return new Vector3(new_x, new_y, 0);
+    }
+
+    void UpdateGoal(Vector3 goalCoords)
+	{
+        navGoal.transform.position = goalCoords;
     }
 
     void K_means()
@@ -81,15 +125,11 @@ public class PlayerDetecter : MonoBehaviour
         var begin_time = Math.Round(Time.realtimeSinceStartup);
         while (moved != 0)
         {
-
             if(Time.realtimeSinceStartup % (180 * Time.deltaTime) == 0)
                 Clusterise();
-                
-            
-            
         }
         string mesaj = "Done Clustering after " + iterations + " iterations";
-        Debug.Log(mesaj);
+        //Debug.Log(mesaj);
 
     }
 
@@ -99,8 +139,9 @@ public class PlayerDetecter : MonoBehaviour
         if(coll.gameObject.name == "Player")
         {
             positions.Add(coll.gameObject.transform.position);
-            Debug.Log("Collided");
-            Debug.Log(coll.gameObject.name);
+            //Debug.Log("Collided");
+            //Debug.Log(coll.gameObject.name);
+            navGoal.transform.position = coll.gameObject.transform.position;
         }
     }
 

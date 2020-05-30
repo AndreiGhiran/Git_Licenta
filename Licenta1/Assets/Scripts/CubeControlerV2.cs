@@ -9,11 +9,11 @@ public class CubeControlerV2 : MonoBehaviour
     private Vector2 endPosition;
     float movementSpeed = 3f;
     Boolean move = true;
-    MocAI adv_move;
+    Navigator adv_move;
     // Start is called before the first frame update
     void Start()
     {
-        adv_move = (MocAI)adversar.GetComponent("MocAI");
+        adv_move = (Navigator)adversar.GetComponent("Navigator");
         rb = GetComponent<Rigidbody2D>();
         endPosition = rb.position;
     }

@@ -9,7 +9,7 @@ public class MocAI : MonoBehaviour
     private Rigidbody2D rb;
     float movementSpeed = 3f;
     private Vector2 endPosition;
-
+    public GameObject navGoal;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
