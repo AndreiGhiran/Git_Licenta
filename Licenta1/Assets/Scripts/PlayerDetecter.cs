@@ -21,7 +21,7 @@ public class PlayerDetecter : MonoBehaviour
     int moved;
     int iterations = 0;
     bool clustering = true;
-
+    
     
 
     // Start is called before the first frame update
@@ -64,8 +64,9 @@ public class PlayerDetecter : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
-            clustering = true;
-            InvokeRepeating("Clusterise", 1f, 2f);
+            //clustering = true;
+            //InvokeRepeating("Clusterise", 1f, 2f);
+            K_means();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -110,9 +111,9 @@ public class PlayerDetecter : MonoBehaviour
 			new_y = new_y - 0.5f;
 
 
-		Debug.Log(String.Format("new_x = {0} new_x_t = {1}\nnew_y = {2} new_y_t = {3}", new_x, new_x_t, new_y, new_y_t));
+		//Debug.Log(String.Format("new_x = {0} new_x_t = {1}\nnew_y = {2} new_y_t = {3}", new_x, new_x_t, new_y, new_y_t));
 
-        return new Vector3(new_x, new_y, 0);
+        return new Vector3(new_x, new_y, 0f);
     }
 
     void UpdateGoal(Vector3 goalCoords)
@@ -122,11 +123,10 @@ public class PlayerDetecter : MonoBehaviour
 
     void K_means()
     {
-        var begin_time = Math.Round(Time.realtimeSinceStartup);
+        //var begin_time = Math.Round(Time.realtimeSinceStartup);
         while (moved != 0)
         {
-            if(Time.realtimeSinceStartup % (180 * Time.deltaTime) == 0)
-                Clusterise();
+            Clusterise();
         }
         string mesaj = "Done Clustering after " + iterations + " iterations";
         //Debug.Log(mesaj);
@@ -141,9 +141,52 @@ public class PlayerDetecter : MonoBehaviour
             positions.Add(coll.gameObject.transform.position);
             //Debug.Log("Collided");
             //Debug.Log(coll.gameObject.name);
-            navGoal.transform.position = coll.gameObject.transform.position;
+            //float x, y, z , new_x,new_y,new_z;
+            //x = coll.gameObject.transform.position.x;
+            //y = coll.gameObject.transform.position.y;
+            //z = 0.5f;
+            //new_x = (float)Math.Round(x);
+            //new_y = (float)Math.Round(y);
+
+            //if (new_x > x)
+            //    x = new_x - 0.5f;
+            //else
+            //    x = new_x + 0.5f;
+
+            //if (new_y > y)
+            //    y = new_y - 0.5f;
+            //else
+            //    y = new_y + 0.5f;
+
+            //navGoal.transform.position =new Vector3(x,y,z);
         }
     }
+
+    void OnTriggerStay2D(Collider2D coll)
+	{
+        if (coll.gameObject.name == "Player")
+        {
+            float x, y, z, new_x, new_y, new_z;
+            x = coll.gameObject.transform.position.x;
+            y = coll.gameObject.transform.position.y;
+            z = 0.5f;
+            new_x = (float)Math.Round(x);
+            new_y = (float)Math.Round(y);
+
+            if (new_x > x)
+                x = new_x - 0.5f;
+            else
+                x = new_x + 0.5f;
+
+            if (new_y > y)
+                y = new_y - 0.5f;
+            else
+                y = new_y + 0.5f;
+
+            navGoal.transform.position = new Vector3(x, y, z);
+        }
+    }
+
 
     void OnApplicationQuit()
     {
