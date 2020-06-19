@@ -295,12 +295,12 @@ public class PlayerDetecter : MonoBehaviour
         {
             
             int k = 0;
-            float dist = (float)Math.Sqrt(Math.Pow((points_go[i].transform.position.x - cluster_centers[k].transform.position.x), 2) + Math.Pow((points_go[i].transform.position.y - cluster_centers[k].transform.position.y), 2));
+            float dist = (float)Math.Pow(Math.Sqrt(Math.Pow((points_go[i].transform.position.x - cluster_centers[k].transform.position.x), 2) + Math.Pow((points_go[i].transform.position.y - cluster_centers[k].transform.position.y), 2)),2);
             for (int j = 1; j < cluster_centers.Count; j++)
             {
-                if (dist > (float)Math.Sqrt(Math.Pow((points_go[i].transform.position.x - cluster_centers[j].transform.position.x), 2) + Math.Pow((points_go[i].transform.position.y - cluster_centers[j].transform.position.y), 2)))
+                if (dist > (float)Math.Pow(Math.Sqrt(Math.Pow((points_go[i].transform.position.x - cluster_centers[j].transform.position.x), 2) + Math.Pow((points_go[i].transform.position.y - cluster_centers[j].transform.position.y), 2)),2))
                 {
-                    dist = (float)Math.Sqrt(Math.Pow((points_go[i].transform.position.x - cluster_centers[j].transform.position.x), 2) + Math.Pow((points_go[i].transform.position.y - cluster_centers[j].transform.position.y), 2));
+                    dist = (float)Math.Pow(Math.Sqrt(Math.Pow((points_go[i].transform.position.x - cluster_centers[j].transform.position.x), 2) + Math.Pow((points_go[i].transform.position.y - cluster_centers[j].transform.position.y), 2)),2);
                     k = j;
                 }
             }

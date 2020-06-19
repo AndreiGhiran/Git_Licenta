@@ -1,0 +1,6 @@
+Trebuie ss-uri cu cod?
+Trebuie sa incep sa scriu cum si unde se apeleaza functiile etc? 
+Trebuie sa pun graficuri si diagrame unde e cazul?
+Trebuie explicat doar ce folosesc si cum sau si unde se gasesc in 
+unity(i.e. in ce script e k-means, A*, etc)?
+Trebuie s prezint in engleza?
