@@ -1,18 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
-using System.ComponentModel;
 using UnityEngine.Tilemaps;
-using System.Threading;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
-using Microsoft.Win32;
-using System.Reflection;
 
 public class Navigator : MonoBehaviour
 {
+    
     private Rigidbody2D rb;
     float movementSpeed = 3f;
     private Vector2 endPosition;
@@ -23,8 +16,9 @@ public class Navigator : MonoBehaviour
     List<Vector3> path;
     int move_number;
     List<int> moves = new List<int>();
-    Boolean moved_off_goal = false;
     List<GameObject> path_objs = new List<GameObject>();
+    bool display = false;
+    public GameObject playMode;
 
     void Start()
     {
@@ -32,8 +26,14 @@ public class Navigator : MonoBehaviour
         endPosition = rb.position;
         lastGoalPosition = navGoal.transform.position;
         move_number = 0;
-        A_star_path_finder(rb.position);
-        CalculateMoves();
+        if (playMode.activeSelf)
+		{
+			//A_star_path_finder(rb.position);
+			//CalculateMoves();
+		}
+
+
+        //make_path();
 
     }
 
@@ -55,11 +55,15 @@ public class Navigator : MonoBehaviour
             move_number = 0;
             A_star_path_finder(endPosition);
             CalculateMoves();
+            if (!playMode.activeSelf)
+            {
+                make_path();
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && !playMode.activeSelf)
         {
-            display_Path();
+            toggle_display_Path();
         }
     }
     
@@ -173,7 +177,7 @@ public class Navigator : MonoBehaviour
 		}
 	}
 
-    Boolean isWall(Vector3 place)
+    bool isWall(Vector3 place)
 	{
         Vector3Int coords = new Vector3Int((int)Math.Floor(place.x), (int)Math.Floor(place.y), 0);
 
@@ -190,7 +194,7 @@ public class Navigator : MonoBehaviour
         return false;
     }
 
-    Boolean onGoal(Vector3 coords)
+    bool onGoal(Vector3 coords)
 	{
         if (coords.x == navGoal.transform.position.x && coords.y == navGoal.transform.position.y)
         {
@@ -204,7 +208,7 @@ public class Navigator : MonoBehaviour
 	{
         Debug.Log("A_Star_Start");
         HashSet<Vector3> visited = new HashSet<Vector3>();
-        var A_star_stack = new List<KeyValuePair<Vector3, float>>();
+        List<KeyValuePair<Vector3, float>> A_star_stack = new List<KeyValuePair<Vector3, float>>();
         Dictionary<Vector3, Vector3> from = new Dictionary<Vector3, Vector3>();
         Dictionary<Vector3, int> cost = new Dictionary<Vector3, int>();
         List<Vector3> directions = new List<Vector3>();
@@ -236,10 +240,80 @@ public class Navigator : MonoBehaviour
             Vector3 up = new Vector3(location.x, location.y + 1f, location.z);
             Vector3 down = new Vector3(location.x, location.y - 1f, location.z);
 
-            directions.Add(left);
-            directions.Add(right);
-            directions.Add(up);
-            directions.Add(down);
+
+            if (location.x > rb.position.x && location.y == rb.position.y)
+            {
+                directions.Add(right);
+                directions.Add(up);
+                directions.Add(down);
+                directions.Add(left);
+            }
+            else
+            if (location.x > rb.position.x && location.y > rb.position.y)
+            {
+                directions.Add(up);
+                directions.Add(right);
+                directions.Add(left);
+                directions.Add(down);
+                
+            }
+            else
+            if (location.x > rb.position.x && location.y < rb.position.y)
+            {
+                directions.Add(down);
+                directions.Add(right);
+                directions.Add(left);
+                directions.Add(up);
+                
+            }
+            else
+            if (location.x < rb.position.x && location.y == rb.position.y)
+            {
+                directions.Add(left);
+                directions.Add(up);
+                directions.Add(down);
+                directions.Add(right);
+            }
+            else
+            if (location.x < rb.position.x && location.y > rb.position.y)
+            {
+                directions.Add(left);
+                directions.Add(up);
+                directions.Add(down);
+                directions.Add(right);
+            }
+            else
+            if (location.x < rb.position.x && location.y < rb.position.y)
+            {
+                directions.Add(left);
+                directions.Add(down);
+                directions.Add(up);
+                directions.Add(right);
+            }
+            else
+            if (location.y > rb.position.y && location.x == rb.position.x)
+            {
+                directions.Add(up);
+                directions.Add(right);
+                directions.Add(left);
+                directions.Add(down);
+            }
+            else
+            if (location.y < rb.position.y && location.x == rb.position.x)
+            {
+                directions.Add(down);
+                directions.Add(right);
+                directions.Add(left);
+                directions.Add(up);
+            }
+            else
+            {
+                directions.Add(down);
+                directions.Add(right);
+                directions.Add(left);
+                directions.Add(up);
+            }                
+
 
             for (int i = 0; i < 4; i++)
             {
@@ -259,7 +333,7 @@ public class Navigator : MonoBehaviour
                     }
                     else
                         from.Add(directions[i], location);
-                    Boolean exists = false;
+                    bool exists = false;
                     for (int j = 0; j < A_star_stack.Count; j++)
                     {
                         if (A_star_stack[j].Key == directions[i])
@@ -287,7 +361,7 @@ public class Navigator : MonoBehaviour
             path.Add(step);
 		}
         path.Reverse();
-        display_Path();
+        //display_Path();
     }
 
     float getDistance(Vector3 start, Vector3 end)
@@ -296,18 +370,34 @@ public class Navigator : MonoBehaviour
         return dist;
     }
 
-    void display_Path()
+    void make_path()
 	{
-        if(path_objs.Count != 0)
-		{
-            for(int i = 0; i < path_objs.Count;i++)
-			{
+        if (path_objs.Count != 0)
+        {
+            for (int i = 0; i < path_objs.Count; i++)
+            {
                 Destroy(path_objs[i]);
-			}
-		}
-        for (int i = 0; i < path.Count; i++)
-		{
-            path_objs.Add(Instantiate(path_prefab, path[i], Quaternion.identity));
+            }
+            path_objs.Clear();
         }
+        for (int i = 0; i < path.Count; i++)
+        {
+            GameObject point = Instantiate(path_prefab, path[i], Quaternion.identity);
+            point.SetActive(display);
+            path_objs.Add(point);
+        }
+    }
+
+    void toggle_display_Path()
+	{
+        display = !display;
+        Debug.Log(path_objs.Count);
+        for (int i = 0; i < path_objs.Count; i++)
+		{
+			path_objs[i].SetActive(display);
+		}
+        navGoal.GetComponent<SpriteRenderer>().enabled = display;
+
+
     }
 }

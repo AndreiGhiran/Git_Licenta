@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 public class CubeControlerV2 : MonoBehaviour
 {
@@ -8,8 +6,9 @@ public class CubeControlerV2 : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 endPosition;
     float movementSpeed = 3f;
-    Boolean move = true;
+    bool move = true;
     Navigator adv_move;
+
     // Start is called before the first frame update
     void Start()
     {

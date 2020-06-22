@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
@@ -21,8 +20,10 @@ public class PlayerDetecter : MonoBehaviour
     int moved;
     int iterations = 0;
     bool clustering = true;
-    
-    
+    public GameObject playMode;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,39 +39,27 @@ public class PlayerDetecter : MonoBehaviour
         initialize_Cluster_Centers_and_Points();
         //display_Clusters();
         moved = cl_number;
-        
+        if (playMode.activeSelf)
+        {
+            K_means();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Points();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Save();
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Load();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && !playMode.activeSelf)
         {
             Clusterise();
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && !playMode.activeSelf)
         {
-            //clustering = true;
-            //InvokeRepeating("Clusterise", 1f, 2f);
-            K_means();
+			clustering = true;
+			InvokeRepeating("Clusterise", 1f, 2f);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && !playMode.activeSelf)
         {
-            display_Clusters();
+            toggle_display_Clusters();
         }
         if (moved == 0 && clustering)
         {
@@ -342,17 +331,16 @@ public class PlayerDetecter : MonoBehaviour
         //Debug.Log(moved);
     }
 
-    void display_Clusters()
+    void toggle_display_Clusters()
     {
-        
         for (int i = 0; i < clusters.Count; i++)
         {
-            cluster_centers[i].SetActive(true);
+            cluster_centers[i].SetActive(!cluster_centers[i].activeSelf);
         }
         for (int j = 0; j < points_go.Count; j++)
         {
             GameObject point = points_go[j];
-            point.SetActive(true);
+            point.SetActive(!point.activeSelf);
         }
     }
     void Clusterise()

@@ -55,12 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ClickEventTest.cs" />
      <Compile Include="Assets\Scripts\CubeControlerV2.cs" />
-     <Compile Include="Assets\Scripts\MocAI.cs" />
+     <Compile Include="Assets\Scripts\GameMasterScript.cs" />
      <Compile Include="Assets\Scripts\Navigator.cs" />
      <Compile Include="Assets\Scripts\PlayerDetecter.cs" />
-     <Compile Include="Assets\Scripts\SphereCeckTest.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
@@ -80,37 +78,37 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Sprite.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Tilemap.Editor">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta1/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
