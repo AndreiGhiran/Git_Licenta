@@ -158,7 +158,7 @@ public class Navigator : MonoBehaviour
             //Debug.Log("Goal Reached");
             //level.SetActive(false);
             //GO_Canvas.SetActive(true);
-            GO_Text.text = "Game Over\nAI Won";
+            GO_Text.text = "Game Over\nAI Wins the Game";
         }
         endPosition.y = (float)Math.Round(rb.position.y, 1);
         endPosition.x = (float)Math.Round(rb.position.x, 1);

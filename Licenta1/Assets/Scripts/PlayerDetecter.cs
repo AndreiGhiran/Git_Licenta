@@ -21,7 +21,9 @@ public class PlayerDetecter : MonoBehaviour
     int iterations = 0;
     bool clustering = true;
     public GameObject playMode;
+    public GameObject vision_field;
     public TextMeshProUGUI Dev_Text;
+
 
 
 
@@ -334,6 +336,7 @@ public class PlayerDetecter : MonoBehaviour
 
     void toggle_display_Clusters()
     {
+        vision_field.SetActive(!vision_field.activeSelf);
         for (int i = 0; i < clusters.Count; i++)
         {
             cluster_centers[i].SetActive(!cluster_centers[i].activeSelf);

@@ -25,7 +25,7 @@ public class GoalControlerScript : MonoBehaviour
         {
             Time.timeScale = 0f;
             Debug.Log("Goal Reached");
-            GO_Text.text = "Game Over\nPlayer Won";
+            GO_Text.text = "Game Over\nPlayer Wins the Game";
         }
     }
 }
