@@ -229,7 +229,6 @@ public class Navigator : MonoBehaviour
         A_star_stack.Add(new KeyValuePair<Vector3, float>(start, getDistance(start, navGoal.transform.position)));
         from.Add(start, start);
         cost.Add(start, 0);
-        int iter = 1;
         while (true){
             Vector3 location = A_star_stack[0].Key;
 
