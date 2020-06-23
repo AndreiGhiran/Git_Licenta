@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.IO;
 using System;
-
+using TMPro;
 
 public class PlayerDetecter : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class PlayerDetecter : MonoBehaviour
     int iterations = 0;
     bool clustering = true;
     public GameObject playMode;
-
+    public TextMeshProUGUI Dev_Text;
 
 
 
@@ -55,7 +55,7 @@ public class PlayerDetecter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && !playMode.activeSelf)
         {
 			clustering = true;
-			InvokeRepeating("Clusterise", 1f, 2f);
+			InvokeRepeating("Clusterise", 1f, 0.5f);
         }
         if (Input.GetKeyDown(KeyCode.D) && !playMode.activeSelf)
         {
@@ -65,8 +65,9 @@ public class PlayerDetecter : MonoBehaviour
         {
             clustering = false;
             CancelInvoke();
-            string mesaj = "Done Clustering after " + (iterations - 1) + " iterations";
-            Debug.Log(mesaj);
+            string mesaj = "K-means has stoppend after " + (iterations - 1) + " iterations";
+            Dev_Text.text=mesaj;
+            //Debug.Log(mesaj);
             UpdateGoal(SetNavGoalCoords());
         }
     }
@@ -117,8 +118,8 @@ public class PlayerDetecter : MonoBehaviour
         {
             Clusterise();
         }
-        string mesaj = "Done Clustering after " + iterations + " iterations";
-        //Debug.Log(mesaj);
+        string mesaj = "K-means has stoppend after " + (iterations - 1) + " iterations";
+        Dev_Text.text=mesaj;
 
     }
 

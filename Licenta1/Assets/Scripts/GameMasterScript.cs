@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class GameMasterScript : MonoBehaviour
 {
-    public GameObject navGoal;
-    public GameObject player;
-    public GameObject adv;
-    public GameObject grid;
+    public GameObject level;
+    public GameObject canvas1;
     public GameObject canvas2;
     public GameObject PlayMode;
-    public GameObject DevMode;
 
     // Start is called before the first frame update
     void Start()
     {
-        navGoal.SetActive(false);
-        player.SetActive(false);
-        adv.SetActive(false);
-        grid.SetActive(false);
-        DevMode.SetActive(false);
+        level.SetActive(false);
+        canvas1.SetActive(false);
         PlayMode.SetActive(false);
     }
 
@@ -32,26 +26,20 @@ public class GameMasterScript : MonoBehaviour
         }
     }
 
-
     public void setup_play_mode()
 	{
-        common_objects();
+        level.SetActive(true);
+        canvas2.SetActive(false);
+        canvas1.SetActive(false);
         PlayMode.SetActive(true);
     }
 
     public void setup_dev_mode()
 	{
-        common_objects();
-        DevMode.SetActive(true);
-    }
-
-    void common_objects()
-	{
-        navGoal.SetActive(true);
-        player.SetActive(true);
-        adv.SetActive(true); 
-        grid.SetActive(true);
+        level.SetActive(true);
         canvas2.SetActive(false);
-
+        canvas1.SetActive(true);
+        PlayMode.SetActive(false);
     }
+
 }

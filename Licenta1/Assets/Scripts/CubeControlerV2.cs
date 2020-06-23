@@ -66,7 +66,7 @@ public class CubeControlerV2 : MonoBehaviour
     }
     void OnCollisionStay2D(Collision2D coll)
     {
-        Debug.Log("Collided");
+        //Debug.Log("Collided");
         endPosition.y = (float)Math.Round(rb.position.y, 1);
         endPosition.x = (float)Math.Round(rb.position.x, 1);
     }

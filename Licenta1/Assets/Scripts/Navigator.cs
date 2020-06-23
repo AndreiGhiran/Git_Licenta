@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 public class Navigator : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Navigator : MonoBehaviour
     List<GameObject> path_objs = new List<GameObject>();
     bool display = false;
     public GameObject playMode;
+    public TextMeshProUGUI GO_Text;
 
     void Start()
     {
@@ -150,8 +152,17 @@ public class Navigator : MonoBehaviour
     void OnCollisionStay2D(Collision2D coll)
     {
         //Debug.Log("Collided");
+         if(coll.gameObject.name == "Player")
+        {
+            Time.timeScale = 0f;
+            //Debug.Log("Goal Reached");
+            //level.SetActive(false);
+            //GO_Canvas.SetActive(true);
+            GO_Text.text = "Game Over\nAI Won";
+        }
         endPosition.y = (float)Math.Round(rb.position.y, 1);
         endPosition.x = (float)Math.Round(rb.position.x, 1);
+       
     }
 
     void CalculateMoves()
