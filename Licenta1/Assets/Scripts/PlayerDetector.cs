@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class PlayerDetector : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerDetector : MonoBehaviour
     public GameObject playMode;
     public GameObject vision_field;
     public TextMeshProUGUI Dev_Text;
+    public Tilemap tilemap;
 
 
     // Start is called before the first frame update
@@ -54,7 +56,7 @@ public class PlayerDetector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && !playMode.activeSelf)
         {
 			clustering = true;
-			InvokeRepeating("Clusterise", 1f, 0.5f);
+			InvokeRepeating("Clusterise", 0.5f, 0.5f);
         }
         if (Input.GetKeyDown(KeyCode.D) && !playMode.activeSelf)
         {
@@ -98,9 +100,62 @@ public class PlayerDetector : MonoBehaviour
 		else
 			new_y = new_y - 0.5f;
 
-        navGoal.transform.position = new Vector3(new_x, new_y, 0.5f);
+        Vector3 navCoords = new Vector3(new_x, new_y, 0.5f);
+
+        if (!isWall(navCoords))
+		{
+            navGoal.transform.position = new Vector3(new_x, new_y, 0.5f);
+		}
+        else
+		{
+            int step = 1;
+            while (true)
+            {
+                if (!isWall(new Vector3(new_x + step, new_y, 0.5f)))
+                {
+                    navGoal.transform.position = new Vector3(new_x + step, new_y, 0.5f);
+                    break;
+                }
+                else
+                    if (!isWall(new Vector3(new_x - step, new_y, 0.5f)))
+                {
+                    navGoal.transform.position = new Vector3(new_x - step, new_y, 0.5f);
+                    break;
+                }
+                else
+                    if (!isWall(new Vector3(new_x, new_y + step, 0.5f)))
+                {
+                    navGoal.transform.position = new Vector3(new_x, new_y + step, 0.5f);
+                    break;
+                }
+                else
+                    if (!isWall(new Vector3(new_x, new_y - step, 0.5f)))
+                {
+                    navGoal.transform.position = new Vector3(new_x, new_y - step, 0.5f);
+                    break;
+                }
+                step++;
+            }
+        }
     }
 
+    bool isWall(Vector3 place)
+    {
+        Vector3Int coords = new Vector3Int((int)Math.Floor(place.x), (int)Math.Floor(place.y), 0);
+
+        TileBase tile = tilemap.GetTile(coords);
+        if (tile != null)
+        {
+            //Debug.Log("Not null");
+            if (tile.name == "WallPiece")
+            {
+                //Debug.Log(tile.name);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
     void K_means()
     {

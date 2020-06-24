@@ -28,14 +28,6 @@ public class Navigator : MonoBehaviour
         endPosition = rb.position;
         lastGoalPosition = navGoal.transform.position;
         move_number = 0;
-        if (playMode.activeSelf)
-		{
-			//A_star_path_finder(rb.position);
-			//CalculateMoves();
-		}
-
-
-        //make_path();
 
     }
 

@@ -5,7 +5,7 @@ ScriptsOnlyBuild:
     - GameMasterScript
     - GoalControlerScript
     - Navigator
-    - PlayerDetecter
+    - PlayerDetector
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridBrushEditor
@@ -145,10 +145,10 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 125ab6f80c055410512c98e3e715e9f5
+      Hash: 909a43dbe9c7291085ea2094bbae42ff
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PlayerDetecter
+    className: PlayerDetector
   - hash:
       serializedVersion: 2
       Hash: 626925ef558787b2d85c809198164d19
@@ -578,4 +578,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/AndreiG/Desktop/Licenta/Git_Licenta/Licenta_Build_1.0/Licenta1.exe
+  playerPath: C:/Users/AndreiG/Desktop/Facultate/Licenta/Git_Licenta/Licenta_Build_1.1/Licenta1.exe
