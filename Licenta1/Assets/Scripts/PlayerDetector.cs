@@ -7,16 +7,16 @@ using UnityEngine.Tilemaps;
 
 public class PlayerDetector : MonoBehaviour
 {
-    List<List<GameObject>> clusters;
-    List<Vector2> positions;
     List<Vector2> old_points;
+    List<Vector2> positions;
+    List<List<GameObject>> clusters;
     List<GameObject> cluster_centers;
     List<GameObject> points_go;
+    List<Color> colors;
     public int cl_number;
     public GameObject clusterCenter;
     public GameObject point_prefab;
     public GameObject navGoal;
-    List<Color> colors;
     int moved;
     int iterations = 0;
     bool clustering = true;
@@ -36,11 +36,9 @@ public class PlayerDetector : MonoBehaviour
         clusters = new List<List<GameObject>>();
         Load();
         make_Colors();
-        //Debug.Log(colors.Count);
         initialize_Cluster_Centers_and_Points();
-        //display_Clusters();
         moved = cl_number;
-        if (playMode.activeSelf)
+        if (playMode.activeSelf && old_points.Count!=0)
         {
             K_means();
         }
@@ -53,10 +51,14 @@ public class PlayerDetector : MonoBehaviour
         {
             Clusterise();
         }
-        if (Input.GetKeyDown(KeyCode.K) && !playMode.activeSelf)
+        if (Input.GetKeyDown(KeyCode.K) && !playMode.activeSelf && old_points.Count!=0)
         {
 			clustering = true;
 			InvokeRepeating("Clusterise", 0.5f, 0.5f);
+        }
+        else{
+            string mesaj = "points.txt was not found and a new empty file was created or a it is empty" ;
+            Dev_Text.text=mesaj;
         }
         if (Input.GetKeyDown(KeyCode.D) && !playMode.activeSelf)
         {
@@ -68,7 +70,6 @@ public class PlayerDetector : MonoBehaviour
             CancelInvoke();
             string mesaj = "K-means has stoppend after " + (iterations - 1) + " iterations";
             Dev_Text.text=mesaj;
-            //Debug.Log(mesaj);
             SetNavGoalCoords();
         }
     }

@@ -55,10 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CubeControlerV2.cs" />
-     <Compile Include="Assets\Scripts\GameMasterScript.cs" />
-     <Compile Include="Assets\Scripts\GoalControlerScript.cs" />
+     <Compile Include="Assets\Scripts\GameMaster.cs" />
+     <Compile Include="Assets\Scripts\GoalControler.cs" />
      <Compile Include="Assets\Scripts\Navigator.cs" />
+     <Compile Include="Assets\Scripts\PlayerControler.cs" />
      <Compile Include="Assets\Scripts\PlayerDetector.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

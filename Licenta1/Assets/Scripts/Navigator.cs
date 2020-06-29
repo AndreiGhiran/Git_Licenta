@@ -110,9 +110,11 @@ public class Navigator : MonoBehaviour
 			after_random_move(choice);
 		}
 	}
+
     void after_random_move(int choice)
 	{
         if (onGoal(rb.position)) {
+            Debug.Log("in after_random_move if");
 
             move_number = 0;
             moves = new List<int>();
@@ -120,20 +122,16 @@ public class Navigator : MonoBehaviour
             switch (choice)
             {
                 case 0:
-                    //endPosition.x -= 1;
                     moves.Add(1);
                     break;
                 case 1:
-                    //endPosition.x += 1;
                     moves.Add(0);
                     break;
                 case 2:
                     moves.Add(3);
-                    //endPosition.y -= 1;
                     break;
                 default:
                     moves.Add(2);
-                    //endPosition.y += 1;
                     break;
 
             }
@@ -147,9 +145,6 @@ public class Navigator : MonoBehaviour
          if(coll.gameObject.name == "Player")
         {
             Time.timeScale = 0f;
-            //Debug.Log("Goal Reached");
-            //level.SetActive(false);
-            //GO_Canvas.SetActive(true);
             GO_Text.text = "Game Over\nAI Wins the Game";
         }
         endPosition.y = (float)Math.Round(rb.position.y, 1);
@@ -214,7 +209,7 @@ public class Navigator : MonoBehaviour
         List<KeyValuePair<Vector3, float>> A_star_stack = new List<KeyValuePair<Vector3, float>>();
         Dictionary<Vector3, Vector3> from = new Dictionary<Vector3, Vector3>();
         Dictionary<Vector3, int> cost = new Dictionary<Vector3, int>();
-        List<Vector3> directions = new List<Vector3>();
+        List<Vector3> directions;
         List<Vector3> proto_path = new List<Vector3>();
         path = new List<Vector3>();
 
@@ -331,7 +326,6 @@ public class Navigator : MonoBehaviour
                     if (from.ContainsKey(directions[i]))
                     {
                         from[directions[i]] = location;
-
                     }
                     else
                         from.Add(directions[i], location);
@@ -357,13 +351,12 @@ public class Navigator : MonoBehaviour
 
         Vector3 step = proto_path[proto_path.Count - 1];
         path.Add(step);
-        while(from[step] != step)
+        while(step != start)
 		{
             step = from[step];
             path.Add(step);
 		}
         path.Reverse();
-        //display_Path();
     }
 
     float getDistance(Vector3 start, Vector3 end)
